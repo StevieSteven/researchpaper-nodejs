@@ -1,0 +1,18 @@
+{
+  "development": {
+    "schema": "shopsystem-java",
+    "username": "root",
+    "password": "dieentekacktindenteich",
+    "host": "localhost",
+    "port": "3306",
+    "dialect": "mysql"
+  },
+  "production": {
+    "schema": "DBSchema",
+    "username": "name",
+    "password": "pass",
+    "host": "localhost",
+    "port": "8080",
+    "dialect": "mysql"
+  }
+}

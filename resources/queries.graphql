@@ -1,0 +1,147 @@
+#
+#QUERIES
+#
+
+#
+#B1 - Anzeigen von Nutzer:
+#
+
+{
+	Customer(id: ID!) {
+		prename
+		surname
+		ratings
+	}
+}
+
+#
+#B2 - Nutzer mit Adressen
+#
+
+{
+	Customer(id: ID!) {
+		prename
+		surname
+		email
+		address
+		ratings
+	}
+}
+
+#oder:
+
+{
+	me {
+		prename
+		surname
+		email
+		address
+		ratings
+	}
+}
+
+#
+#B3 - Anzeigen aller Produkte einer bestimmten Kategorien
+#
+
+{
+	Category(name: String) {
+		products {
+			name
+			price
+			deliveryTime
+			description
+		}
+	}
+
+}
+
+#
+#B4 - Anzeigen der Bestellhistorie in einem Zeitraum
+#
+
+{
+	Orders(start: Date, end: Date) {
+		status {
+			message
+		}
+		items {
+			name
+			price
+		}
+		address {
+			street
+			number
+			city
+			postalCode
+		}
+
+	}
+
+}
+
+#
+#B5 Anzeigen der Bewertungen eines Nutzers
+#
+
+{
+	Customer(id: ID!) {
+		ratings {
+			stars
+			comment
+			product {
+				title
+			}
+		}
+	}
+}
+
+
+#
+#B6 Ein Produkt soll in den Warenkorb gelegt werden
+#
+
+mutation putProductIntoShoppingCard(productId: ID!, count: int!) {
+	Shoppingcard {
+		products {
+			product {
+				title
+				price
+				deliveryTime
+			}
+			quantity
+		}
+	}
+}
+
+#
+#B7 Bestellung soll abgeschlossen werden
+#
+
+mutation finishOrder {
+	Order  {
+		items {
+			product {
+				title
+				price
+			}
+			quantity
+		}
+	}
+}
+
+
+#
+#B8 Bewertung eines Produkts
+#
+
+mutation addRating (productId: ID!, stars: int!, comment: String) {
+	Rating {
+		customer {
+			prename
+			surname
+		}
+		stars
+		comment
+	}
+}
