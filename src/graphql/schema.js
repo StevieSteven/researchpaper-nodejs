@@ -98,6 +98,13 @@ type RootMutation {
         stars: Int!
         comment: String
     ):Rating   
+    
+    addProduct(
+        name: String!
+        price: Float!
+        description: String
+        deliveryTime: Int
+    ):Product
 
 }
 # we need to tell the server which types represent the root query

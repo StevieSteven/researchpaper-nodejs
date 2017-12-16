@@ -26,8 +26,6 @@ let OrderItemDB = new OrderItem();
 let OrderStatusDB = new OrderStatus();
 
 const userId = 5;
-
-
 const resolveFunctions = {
         RootQuery: {
             me(_) {
@@ -61,20 +59,20 @@ const resolveFunctions = {
                 };
 
                 return new Promise((resolve, reject) => {
-                        ShoppingcardDB.findOne({where: {customer_id: userId}}).then((shoppingcard) => {
-                            if (!shoppingcard) {
-                               ShoppingcardDB.create({
-                                   customer_id: userId
-                               }).then((data) => {
-                                   addFct(data);
-                                   resolve(data)
-                               });
-                               return;
-                            }
-                            addFct(shoppingcard);
-                            resolve(shoppingcard)
+                    ShoppingcardDB.findOne({where: {customer_id: userId}}).then((shoppingcard) => {
+                        if (!shoppingcard) {
+                            ShoppingcardDB.create({
+                                customer_id: userId
+                            }).then((data) => {
+                                addFct(data);
+                                resolve(data)
+                            });
+                            return;
+                        }
+                        addFct(shoppingcard);
+                        resolve(shoppingcard)
 
-                        });
+                    });
 
                 });
             },
@@ -147,6 +145,14 @@ const resolveFunctions = {
                     comment: comment,
                     customer_id: userId
                 });
+            },
+            addProduct: (root, {name, price, description, deliveryTime}) => {
+                return ProductDB.create({
+                    name: name,
+                    delivery_time: deliveryTime,
+                    description: description,
+                    price: price
+                })
             }
         },
         Customer: {
