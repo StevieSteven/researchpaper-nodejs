@@ -216,6 +216,11 @@ const resolveFunctions = {
                 resolve(product) {
                     return CategoryDB.findById(product.category_id);
                 }
+            },
+            status: {
+                resolve(product) {
+                    return "LIEFERBAR";
+                }
             }
         }
         ,

@@ -1,4 +1,9 @@
 const typeDefinitions = `
+enum Status {
+    LIEFERBAR
+    AUSVERKAUFT
+}
+
 type Address {
 	id: ID!
 	street: String!
@@ -53,6 +58,7 @@ type Product {
 	ratings: [Rating]
 	description: String
 	category: Category!
+	status: Status
 }
 
 type Rating {
