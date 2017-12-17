@@ -52,7 +52,7 @@ type Product {
 	deliveryTime: Int
 	ratings: [Rating]
 	description: String
-	categories: [Category]!
+	category: Category!
 }
 
 type Rating {

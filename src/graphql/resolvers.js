@@ -212,9 +212,9 @@ const resolveFunctions = {
                 }
             }
             ,
-            categories: {
+            category: {
                 resolve(product) {
-                    return ProductDB.getCategories(product.id);
+                    return CategoryDB.findById(product.category_id);
                 }
             }
         }
@@ -242,7 +242,8 @@ const resolveFunctions = {
             ,
             products: {
                 resolve(category) {
-                    return CategoryDB.getProducts(category.id);
+                    return ProductDB.findAll({where: {category_id: category.id}})
+                    // return CategoryDB.getProducts(category.id);
                 }
             }
         }
@@ -250,7 +251,7 @@ const resolveFunctions = {
         Order: {
             items: {
                 resolve(order) {
-                    return OrderItemDB.findAll({where: {order_id: order.id}})
+                    return OrderItemDB.findAll({where: {order_id: order.id}});
                 }
             }
             ,
