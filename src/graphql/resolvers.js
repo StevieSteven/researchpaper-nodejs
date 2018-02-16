@@ -14,6 +14,22 @@ import Product from './../models/product';
 import OrderItem from './../models/orderItem';
 import OrderStatus from './../models/orderStatus';
 
+import { GraphQLError } from 'graphql';
+
+class ValidationError extends GraphQLError {
+    constructor(errors) {
+        super('The request is invalid.');
+        this.state = errors.reduce((result, error) => {
+            if (Object.prototype.hasOwnProperty.call(result, error.key)) {
+                result[error.key].push(error.message);
+            } else {
+                result[error.key] = [error.message];
+            }
+            return result;
+        }, {});
+    }
+}
+
 let CustomerDB = new Customer();
 let CategoryDB = new Category();
 let AddressDB = new Address();
@@ -52,6 +68,11 @@ const resolveFunctions = {
         },
         RootMutation: {
             putProductIntoShoppingCard: (root, {productId, count}) => {
+
+                throw new ValidationError([
+                    {key: 'test', message: 'test message'}
+                ]);
+
                 let addFct = (shoppingcard) => {
                     ShoppingcardElementDB.create({
                         shoppingcard_id: shoppingcard.id,

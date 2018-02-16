@@ -21,6 +21,12 @@ const graphQLServer = express();
 graphQLServer.use('/graphql', apolloServer({
     schema: schema,
     resolvers: Resolvers,
+    formatError: error => ({
+        message: error.message,
+        state: error.originalError && error.originalError.state,
+        // locations: error.locations,
+        // path: error.path,
+    })
 }));
 
 graphQLServer.get('/graphiql', graphiqlExpress({
